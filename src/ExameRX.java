@@ -4,19 +4,37 @@ public class ExameRX extends Exame {
     private String zonaCorpo;
     private final double CUSTO_UNITARIO = 24.0;
 
-    //Construtor
+    // Construtor completo
     public ExameRX(LocalDate dataRealizacao, Pacientes paciente, String tecnicoResponsavel, String zonaCorpo) {
-        super(dataRealizacao, paciente, tecnicoResponsavel); //Herda os atributos da superclasse Exame
+        super(dataRealizacao, paciente, tecnicoResponsavel);
         this.zonaCorpo = zonaCorpo;
     }
 
-    //Método que devolve o custo final do exame
+    // Construtor sem zonaCorpo
+    public ExameRX(LocalDate dataRealizacao, Pacientes paciente, String tecnicoResponsavel) {
+        this(dataRealizacao, paciente, tecnicoResponsavel, "Indefinida");
+    }
+
+    // Construtor sem tecnicoResponsavel e zonaCorpo
+    public ExameRX(LocalDate dataRealizacao, Pacientes paciente) {
+        this(dataRealizacao, paciente, "Técnico Desconhecido", "Indefinida");
+    }
+
+    // Construtor só com dataRealizacao
+    public ExameRX(LocalDate dataRealizacao) {
+        this(dataRealizacao, new Pacientes(), "Técnico Desconhecido", "Indefinida");
+    }
+
+    // Construtor por omissão (sem parâmetros)
+    public ExameRX() {
+        this(LocalDate.now(), new Pacientes(), "Técnico Desconhecido", "Indefinida");
+    }
+
     @Override
     public double calcularCusto() {
         return CUSTO_UNITARIO;
     }
 
-    //ToString
     @Override
     public String toString() {
         return super.toString() + ", ExameRX{" +
@@ -25,4 +43,3 @@ public class ExameRX extends Exame {
                 '}';
     }
 }
-
