@@ -1,16 +1,14 @@
 import java.time.LocalDate;
+
 public class Pacientes {
     private String numeroUtente;
     private String nome;
     private char genero; // 'M', 'F' ou 'O'
     private LocalDate dataNascimento;
 
-    //Constructor
+    // Construtor completo
     public Pacientes(String numeroUtente, String nome, char genero, LocalDate dataNascimento) {
-
-        // Verifica se o género é válido
         if (genero != 'M' && genero != 'F' && genero != 'O') {
-            // Se não for, mostra erro e não deixa criar o paciente
             throw new IllegalArgumentException("Género inválido. Use 'M', 'F' ou 'O'.");
         }
 
@@ -20,7 +18,27 @@ public class Pacientes {
         this.dataNascimento = dataNascimento;
     }
 
-    //Getters and Setters
+    // Construtor com 3 argumentos (sem data de nascimento)
+    public Pacientes(String numeroUtente, String nome, char genero) {
+        this(numeroUtente, nome, genero, LocalDate.of(2000, 1, 1)); // data padrão
+    }
+
+    // Construtor com 2 argumentos (sem género e data de nascimento)
+    public Pacientes(String numeroUtente, String nome) {
+        this(numeroUtente, nome, 'O', LocalDate.of(2000, 1, 1));
+    }
+
+    // Construtor com 1 argumento (apenas número de utente)
+    public Pacientes(String numeroUtente) {
+        this(numeroUtente, "Sem Nome", 'O', LocalDate.of(2000, 1, 1));
+    }
+
+    // Construtor por omissão (sem argumentos)
+    public Pacientes() {
+        this("000000000", "Sem Nome", 'O', LocalDate.of(2000, 1, 1));
+    }
+
+    // Getters e Setters
     public String getNumeroUtente() {
         return numeroUtente;
     }
@@ -42,6 +60,9 @@ public class Pacientes {
     }
 
     public void setGenero(char genero) {
+        if (genero != 'M' && genero != 'F' && genero != 'O') {
+            throw new IllegalArgumentException("Género inválido. Use 'M', 'F' ou 'O'.");
+        }
         this.genero = genero;
     }
 
