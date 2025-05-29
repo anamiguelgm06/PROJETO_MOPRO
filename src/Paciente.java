@@ -1,15 +1,15 @@
 import java.time.LocalDate;
 
-public class Pacientes {
+public class Paciente {
     private String numeroUtente;
     private String nome;
     private char genero; // 'M', 'F' ou 'O'
     private LocalDate dataNascimento;
 
     // Construtor completo
-    public Pacientes(String numeroUtente, String nome, char genero, LocalDate dataNascimento) {
+    public Paciente(String numeroUtente, String nome, char genero, LocalDate dataNascimento) {
         if (genero != 'M' && genero != 'F' && genero != 'O') {
-            throw new IllegalArgumentException("Género inválido. Use 'M', 'F' ou 'O'.");
+            System.out.println("Género inválido. Use 'M', 'F' ou 'O'.");
         }
 
         this.numeroUtente = numeroUtente;
@@ -19,22 +19,22 @@ public class Pacientes {
     }
 
     // Construtor com 3 argumentos (sem data de nascimento)
-    public Pacientes(String numeroUtente, String nome, char genero) {
+    public Paciente(String numeroUtente, String nome, char genero) {
         this(numeroUtente, nome, genero, LocalDate.of(2000, 1, 1)); // data padrão
     }
 
     // Construtor com 2 argumentos (sem género e data de nascimento)
-    public Pacientes(String numeroUtente, String nome) {
+    public Paciente(String numeroUtente, String nome) {
         this(numeroUtente, nome, 'O', LocalDate.of(2000, 1, 1));
     }
 
     // Construtor com 1 argumento (apenas número de utente)
-    public Pacientes(String numeroUtente) {
+    public Paciente(String numeroUtente) {
         this(numeroUtente, "Sem Nome", 'O', LocalDate.of(2000, 1, 1));
     }
 
     // Construtor por omissão (sem argumentos)
-    public Pacientes() {
+    public Paciente() {
         this("000000000", "Sem Nome", 'O', LocalDate.of(2000, 1, 1));
     }
 

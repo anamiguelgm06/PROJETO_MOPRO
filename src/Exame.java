@@ -6,11 +6,11 @@ public abstract class Exame implements Calculavel {
     // Permitir acesso às variáveis dentro e fora da pasta
     protected int codigo;
     protected LocalDate dataRealizacao;
-    protected Pacientes paciente;
+    protected Paciente paciente;
     protected String tecnicoResponsavel;
 
     // Construtor completo
-    protected Exame(LocalDate dataRealizacao, Pacientes paciente, String tecnicoResponsavel) {
+    protected Exame(LocalDate dataRealizacao, Paciente paciente, String tecnicoResponsavel) {
         this.codigo = contadorCodigos++;
         this.dataRealizacao = dataRealizacao;
         this.paciente = paciente;
@@ -18,18 +18,18 @@ public abstract class Exame implements Calculavel {
     }
 
     // Construtor sem técnico
-    protected Exame(LocalDate dataRealizacao, Pacientes paciente) {
+    protected Exame(LocalDate dataRealizacao, Paciente paciente) {
         this(dataRealizacao, paciente, "Técnico Desconhecido");
     }
 
     // Construtor só com data
     protected Exame(LocalDate dataRealizacao) {
-        this(dataRealizacao, new Pacientes(), "Técnico Desconhecido");
+        this(dataRealizacao, new Paciente(), "Técnico Desconhecido");
     }
 
     // Construtor sem argumentos
     protected Exame() {
-        this(LocalDate.now(), new Pacientes(), "Técnico Desconhecido");
+        this(LocalDate.now(), new Paciente(), "Técnico Desconhecido");
     }
 
     // Getters
@@ -41,7 +41,7 @@ public abstract class Exame implements Calculavel {
         return dataRealizacao;
     }
 
-    public Pacientes getPaciente() {
+    public Paciente getPaciente() {
         return paciente;
     }
 

@@ -5,29 +5,29 @@ public class ExameRM extends Exame {
     private final double CUSTO_BASE = 32.0;
 
     // Construtor completo
-    public ExameRM(LocalDate dataRealizacao, Pacientes paciente, String tecnicoResponsavel, boolean usaContraste) {
+    public ExameRM(LocalDate dataRealizacao, Paciente paciente, String tecnicoResponsavel, boolean usaContraste) {
         super(dataRealizacao, paciente, tecnicoResponsavel);
         this.usaContraste = usaContraste;
     }
 
     // Construtor sem usaContraste
-    public ExameRM(LocalDate dataRealizacao, Pacientes paciente, String tecnicoResponsavel) {
+    public ExameRM(LocalDate dataRealizacao, Paciente paciente, String tecnicoResponsavel) {
         this(dataRealizacao, paciente, tecnicoResponsavel, false);
     }
 
     // Construtor sem tecnicoResponsavel e usaContraste
-    public ExameRM(LocalDate dataRealizacao, Pacientes paciente) {
+    public ExameRM(LocalDate dataRealizacao, Paciente paciente) {
         this(dataRealizacao, paciente, "Técnico Desconhecido", false);
     }
 
     // Construtor só com data
     public ExameRM(LocalDate dataRealizacao) {
-        this(dataRealizacao, new Pacientes(), "Técnico Desconhecido", false);
+        this(dataRealizacao, new Paciente(), "Técnico Desconhecido", false);
     }
 
     // Construtor por omissão (sem parâmetros)
     public ExameRM() {
-        this(LocalDate.now(), new Pacientes(), "Técnico Desconhecido", false);
+        this(LocalDate.now(), new Paciente(), "Técnico Desconhecido", false);
     }
 
     @Override
