@@ -3,14 +3,13 @@ import java.time.LocalDate;
 public abstract class Exame implements Calculavel {
     private static int contadorCodigos = 1;
 
-    // Permitir acesso às variáveis dentro e fora da pasta
     protected int codigo;
-    protected LocalDate dataRealizacao;
+    protected Data dataRealizacao;
     protected Paciente paciente;
     protected String tecnicoResponsavel;
 
     // Construtor completo
-    protected Exame(LocalDate dataRealizacao, Paciente paciente, String tecnicoResponsavel) {
+    protected Exame(Data dataRealizacao, Paciente paciente, String tecnicoResponsavel) {
         this.codigo = contadorCodigos++;
         this.dataRealizacao = dataRealizacao;
         this.paciente = paciente;
@@ -18,18 +17,21 @@ public abstract class Exame implements Calculavel {
     }
 
     // Construtor sem técnico
-    protected Exame(LocalDate dataRealizacao, Paciente paciente) {
+    protected Exame(Data dataRealizacao, Paciente paciente) {
         this(dataRealizacao, paciente, "Técnico Desconhecido");
     }
 
     // Construtor só com data
-    protected Exame(LocalDate dataRealizacao) {
+    protected Exame(Data dataRealizacao) {
         this(dataRealizacao, new Paciente(), "Técnico Desconhecido");
     }
 
-    // Construtor sem argumentos
+    // Construtor sem argumentos - usa a data atual do sistema
     protected Exame() {
-        this(LocalDate.now(), new Paciente(), "Técnico Desconhecido");
+        this.codigo = contadorCodigos++;
+        this.dataRealizacao = Data.now();
+        this.paciente = new Paciente();
+        this.tecnicoResponsavel = "Técnico Desconhecido";
     }
 
     // Getters
@@ -37,7 +39,7 @@ public abstract class Exame implements Calculavel {
         return codigo;
     }
 
-    public LocalDate getDataRealizacao() {
+    public Data getDataRealizacao() {
         return dataRealizacao;
     }
 
@@ -49,12 +51,11 @@ public abstract class Exame implements Calculavel {
         return tecnicoResponsavel;
     }
 
-    // toString
     @Override
     public String toString() {
         return "Exame{" +
                 "codigo=" + codigo +
-                ", dataRealizacao=" + dataRealizacao +
+                ", dataRealizacao=" + dataRealizacao.toString() +
                 ", paciente=" + paciente.getNome() +
                 ", tecnicoResponsavel='" + tecnicoResponsavel + '\'' +
                 '}';

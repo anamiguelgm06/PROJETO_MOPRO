@@ -1,50 +1,57 @@
-import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Paciente {
+
+    /* --------- campo estático para garantir unicidade --------- */
+    private static ArrayList<String> numerosUtenteUsados = new ArrayList<>();
+
+    /* --------- atributos --------- */
     private String numeroUtente;
     private String nome;
-    private char genero; // 'M', 'F' ou 'O'
-    private LocalDate dataNascimento;
+    private char genero;          // 'M', 'F' ou 'O'
+    private Data dataNascimento;  // classe Data do enunciado
 
-    // Construtor completo
-    public Paciente(String numeroUtente, String nome, char genero, LocalDate dataNascimento) {
-        if (genero != 'M' && genero != 'F' && genero != 'O') {
-            System.out.println("Género inválido. Use 'M', 'F' ou 'O'.");
-        }
-
-        this.numeroUtente = numeroUtente;
-        this.nome = nome;
-        this.genero = genero;
-        this.dataNascimento = dataNascimento;
+    /* --------- construtor completo --------- */
+    public Paciente(String numeroUtente, String nome, char genero, Data dataNascimento) {
+        setNumeroUtente(numeroUtente);
+        setNome(nome);
+        setGenero(genero);
+        setDataNascimento(dataNascimento);
     }
 
-    // Construtor com 3 argumentos (sem data de nascimento)
+    /* --------- construtores mais simples --------- */
     public Paciente(String numeroUtente, String nome, char genero) {
-        this(numeroUtente, nome, genero, LocalDate.of(2000, 1, 1)); // data padrão
+        this(numeroUtente, nome, genero, new Data(2000, 1, 1));   // data padrão
     }
 
-    // Construtor com 2 argumentos (sem género e data de nascimento)
     public Paciente(String numeroUtente, String nome) {
-        this(numeroUtente, nome, 'O', LocalDate.of(2000, 1, 1));
+        this(numeroUtente, nome, 'O', new Data(2000, 1, 1));
     }
 
-    // Construtor com 1 argumento (apenas número de utente)
     public Paciente(String numeroUtente) {
-        this(numeroUtente, "Sem Nome", 'O', LocalDate.of(2000, 1, 1));
+        this(numeroUtente, "Sem Nome", 'O', new Data(2000, 1, 1));
     }
 
-    // Construtor por omissão (sem argumentos)
-    public Paciente() {
-        this("000000000", "Sem Nome", 'O', LocalDate.of(2000, 1, 1));
+    public Paciente() {                                           // construtor por omissão
+        this("000000000", "Sem Nome", 'O', new Data(2000, 1, 1));
     }
 
-    // Getters e Setters
+    /* --------- getters / setters --------- */
     public String getNumeroUtente() {
         return numeroUtente;
     }
 
     public void setNumeroUtente(String numeroUtente) {
+        if (numeroUtente == null || numeroUtente.isEmpty()) {
+            System.out.println("Erro: Número de utente não pode estar vazio.");
+            return;
+        }
+        if (numerosUtenteUsados.contains(numeroUtente)) {
+            System.out.println("Erro: Número de utente já existe!");
+            return;
+        }
         this.numeroUtente = numeroUtente;
+        numerosUtenteUsados.add(numeroUtente);
     }
 
     public String getNome() {
@@ -52,7 +59,11 @@ public class Paciente {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if (nome == null || nome.isEmpty() || !nome.matches("[\\p{L} ]+")) { //Aceita qualquer letra, desde com a até com acentos
+            System.out.println("Erro: O nome deve conter apenas letras (incluindo acentos) e espaços, e não pode ser vazio.");
+        } else {
+            this.nome = nome;
+        }
     }
 
     public char getGenero() {
@@ -60,23 +71,30 @@ public class Paciente {
     }
 
     public void setGenero(char genero) {
-        if (genero != 'M' && genero != 'F' && genero != 'O') {
-            throw new IllegalArgumentException("Género inválido. Use 'M', 'F' ou 'O'.");
+        if (genero == 'M' || genero == 'F' || genero == 'O') {
+            this.genero = genero;
+        } else {
+            System.out.println("Erro: Género inválido. Use 'M', 'F' ou 'O'.");
+            this.genero = 'O';   // valor por defeito
         }
-        this.genero = genero;
     }
 
-    public LocalDate getDataNascimento() {
+    public Data getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNascimento(Data dataNascimento) {
+        if (dataNascimento != null) {
+            this.dataNascimento = dataNascimento;
+        } else {
+            this.dataNascimento = new Data(2000, 1, 1);   // valor por defeito
+        }
     }
 
+    /* --------- toString --------- */
     @Override
     public String toString() {
-        return "Pacientes{" +
+        return "Paciente{" +
                 "numeroUtente='" + numeroUtente + '\'' +
                 ", nome='" + nome + '\'' +
                 ", genero=" + genero +
