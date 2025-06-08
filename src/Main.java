@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Centro centro1 = new Centro("Centro de Saúde Lisboa", "123456789", "Rua das Flores, 123", "218765432", "contato@centrolisboa.pt");
+        Centro centro1 = new Centro("Centro de Saúde Lisboa", 123456789, "Rua das Flores, 123", 218765432, "contato@centrolisboa.pt");
 
         List<Paciente> pacientes = new ArrayList<>();
         List<Exame> exames = new ArrayList<>();

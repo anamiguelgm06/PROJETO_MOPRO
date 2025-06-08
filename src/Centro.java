@@ -1,8 +1,9 @@
 public class Centro {
-    private String nome, nif, morada, telefone, email;
+    private String nome, morada, email;
+    private int nif, telefone;
 
     // Construtor completo
-    public Centro(String nome, String nif, String morada, String telefone, String email) {
+    public Centro(String nome, int nif, String morada, int telefone, String email) {
         setNome(nome);       // Validação Nome
         setNif(nif);         // Validação NIF
         this.morada = morada;
@@ -11,18 +12,18 @@ public class Centro {
     }
 
     // Construtor sem email
-    public Centro(String nome, String nif, String morada, String telefone) {
+    public Centro(String nome, int nif, String morada, int telefone) {
         this(nome, nif, morada, telefone, "Email não disponível");
     }
 
     // Construtor sem telefone e email
-    public Centro(String nome, String nif, String morada) {
-        this(nome, nif, morada, "Telefone não disponível", "Email não disponível");
+    public Centro(String nome, int nif, String morada) {
+        this(nome, nif, morada, 0, "Email não disponível");
     }
 
     // Construtor sem argumentos
     public Centro() {
-        this("Nome não definido", "000000000", "Morada não definida", "Telefone não disponível", "Email não disponível");
+        this("Nome não definido", 000000000, "Morada não definida", 91000000, "Email não disponível");
     }
 
     // Getters
@@ -30,7 +31,7 @@ public class Centro {
         return nome;
     }
 
-    public String getNif() {
+    public int getNif() {
         return nif;
     }
 
@@ -38,7 +39,7 @@ public class Centro {
         return morada;
     }
 
-    public String getTelefone() {
+    public int getTelefone() {
         return telefone;
     }
 
@@ -55,22 +56,22 @@ public class Centro {
     }
 
     // Setters com validações
-    public void setNif(String nif) {
-        if (nif != null && nif.matches("\\d{9}")) {
+    public void setNif(int nif) {
+        if (nif != 0 && String.valueOf(nif).length() == 9) {
             this.nif = nif;
         } else {
             System.out.println("Erro: NIF inválido. Deve conter exatamente 9 dígitos numéricos.");
             System.out.println(nif);
-            this.nif = "000000000";
+            this.nif = 0;
         }
     }
 
-    public void setTelefone(String telefone) {
-        if (telefone != null && telefone.matches("\\d{9}")) { // Só aceita 9 dígitos
+    public void setTelefone(int telefone) {
+        if (telefone != 0 && String.valueOf(telefone).length() == 9) { // Só aceita 9 dígitos
             this.telefone = telefone;  // Corrigido aqui!
         } else {
             System.out.println("Erro: Telefone inválido. Deve conter exatamente 9 dígitos numéricos.");
-            this.telefone = "000000000";
+            this.telefone = 0;
         }
     }
 

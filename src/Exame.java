@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 public abstract class Exame implements Calculavel {
-    private static int contadorCodigos = 1;
+    private static int contadorCodigos = 0;
 
     protected int codigo;
     protected Data dataRealizacao;
@@ -53,11 +53,11 @@ public abstract class Exame implements Calculavel {
 
     @Override
     public String toString() {
-        return "Exame{" +
+        return "Exame{ " +
                 "codigo=" + codigo +
                 ", dataRealizacao=" + dataRealizacao.toString() +
                 ", paciente=" + paciente.getNome() +
                 ", tecnicoResponsavel='" + tecnicoResponsavel + '\'' +
-                '}';
+                "} ";
     }
 }
