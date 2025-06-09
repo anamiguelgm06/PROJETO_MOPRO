@@ -1,11 +1,12 @@
 import java.util.ArrayList;
-import Exceptions.*;
+import Exceptions.Excecao;
 
 public class Paciente {
 
-    private static final int NUMERO_POR_OMISSAO   = 999999999;
+    /* --------- valores por omissão--------- */
+    private static final int NUMERO_POR_OMISSAO   = 0;
     private static final String NOME_POR_OMISSAO  = "Sem nome";
-    private static final char GENERO_POR_OMISSAO  = 'O';
+    private static final char GENERO_POR_OMISSAO  = 'X';
     private static final Data DATA_POR_OMISSAO    = new Data(2000, 1, 1);
 
     /* --------- campo estático para garantir unicidade --------- */
@@ -14,15 +15,38 @@ public class Paciente {
     /* --------- atributos --------- */
     private int numeroUtente;
     private String nome;
-    private char genero;          // 'M', 'F' ou 'O'
-    private Data dataNascimento;  // classe Data do enunciado
+    private char genero;
+    private Data dataNascimento;
 
     /* --------- construtor completo --------- */
     public Paciente(int numeroUtente, String nome, char genero, Data dataNascimento) throws Excecao{
-        setNumeroUtente(numeroUtente);
-        setNome(nome);
-        setGenero(genero);
-        setDataNascimento(dataNascimento);
+        try {
+            setNumeroUtente(numeroUtente);
+        } catch (Excecao e) {
+            System.out.println(e + " Usando valor por omissão.");
+            this.numeroUtente = NUMERO_POR_OMISSAO;
+        }
+
+        try {
+            setNome(nome);
+        } catch (Excecao e) {
+            System.out.println(e + " Usando valor por omissão.");
+            this.nome = NOME_POR_OMISSAO;
+        }
+
+        try {
+            setGenero(genero);
+        } catch (Excecao e) {
+            System.out.println(e + " Usando valor por omissão.");
+            this.genero = GENERO_POR_OMISSAO;
+        }
+
+        try {
+            setDataNascimento(dataNascimento);
+        } catch (Excecao e) {
+            System.out.println(e + " Usando valor por omissão.");
+            this.dataNascimento = DATA_POR_OMISSAO;
+        }
     }
 
     /* --------- construtores mais simples --------- */
@@ -45,15 +69,14 @@ public class Paciente {
     /* --------- getters / setters --------- */
     public int getNumeroUtente() { return numeroUtente; }
 
-    public void setNumeroUtente(int numeroUtente) throws Excecao{
+    public void setNumeroUtente(int numeroUtente) throws Excecao {
         if (numeroUtente <= 0) {
-            throw new Excecao("Erro: Número de utente não pode ser 0 ou negativo.");
+            throw new Excecao("Erro: número de utente tem de ser maior do que 0.");
         }
-        if (numerosUtenteUsados.contains(numeroUtente)) {
-            throw new Excecao("Erro: Número de utente já existe!");
+        if (!numerosUtenteUsados.add(numeroUtente)) {
+            throw new Excecao("Erro: número de utente já existe!");
         }
         this.numeroUtente = numeroUtente;
-        numerosUtenteUsados.add(numeroUtente);
     }
 
     public String getNome() { return nome; }
@@ -89,8 +112,18 @@ public class Paciente {
         return "Paciente{ " +
                 "numeroUtente =" + getNumeroUtente() +
                 ", nome =" + getNome() +
-                ", genero =" + getGenero() +
+                ", género =" + getGenero() +
                 ", dataNascimento =" + getDataNascimento() +
-                "} ";
+                " }";
     }
+
+    /* --------- equals --------- */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Paciente)) return false;
+        Paciente outro = (Paciente) o;
+        return this.getNumeroUtente() == outro.getNumeroUtente();
+    }
+
 }

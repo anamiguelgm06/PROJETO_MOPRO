@@ -1,34 +1,62 @@
+import Exceptions.Excecao;
+
 public class ExameRX extends Exame {
+
+    /* --------- valores por omissao --------- */
+    private static final String ZONA_POR_OMISSAO = "Zona indefinida";
+
+    /* --------- atributos --------- */
     private String zonaCorpo;
     private final double CUSTO_UNITARIO;
 
-    // Construtor completo
-    public ExameRX(Data dataRealizacao, Paciente paciente, String tecnicoResponsavel, String zonaCorpo) {
-        super(dataRealizacao, paciente, validarTecnico(tecnicoResponsavel));
-        this.zonaCorpo = validarZona(zonaCorpo);
+    /* --------- construtor completo --------- */
+    public ExameRX(Data dataRealizacao, Paciente paciente, Tecnico tecnicoResponsavel, String zonaCorpo) throws Excecao {
+        super(dataRealizacao, paciente, tecnicoResponsavel);
+
+        try {
+            setZonaCorpo(zonaCorpo);
+        } catch (Excecao e) {
+            System.out.println(e + " Usando valor por omissão.");
+            this.zonaCorpo = ZONA_POR_OMISSAO;
+        }
+
         this.CUSTO_UNITARIO = 24.0;
     }
 
-    // Construtor sem zonaCorpo
-    public ExameRX(Data dataRealizacao, Paciente paciente, String tecnicoResponsavel) {
-        this(dataRealizacao, paciente, tecnicoResponsavel, "Indefinida");
+    /* --------- construtores mais simples --------- */
+    public ExameRX(Data dataRealizacao, Paciente paciente, Tecnico tecnicoResponsavel) throws Excecao {
+        this(dataRealizacao, paciente, tecnicoResponsavel, ZONA_POR_OMISSAO);
     }
 
-    // Construtor sem técnico e zonaCorpo
-    public ExameRX(Data dataRealizacao, Paciente paciente) {
-        this(dataRealizacao, paciente, "Técnico Desconhecido", "Indefinida");
+    public ExameRX(Data dataRealizacao, Paciente paciente) throws Excecao {
+        this(dataRealizacao, paciente, TECNICO_POR_OMISSAO, ZONA_POR_OMISSAO);
     }
 
-    // Construtor só com data
-    public ExameRX(Data dataRealizacao) {
-        this(dataRealizacao, new Paciente(), "Técnico Desconhecido", "Indefinida");
+    public ExameRX(Data dataRealizacao) throws Excecao {
+        this(dataRealizacao, PACIENTE_POR_OMISSAO, TECNICO_POR_OMISSAO, ZONA_POR_OMISSAO);
     }
 
-    // Construtor por omissão (data atual)
-    public ExameRX() {
-        this(Data.now(), new Paciente(), "Técnico Desconhecido", "Indefinida");
+    public ExameRX() throws Excecao {
+        this(DATA_POR_OMISSAO, PACIENTE_POR_OMISSAO, TECNICO_POR_OMISSAO, ZONA_POR_OMISSAO);
     }
 
+    /* --------- getters e setters --------- */
+    public String getZonaCorpo(){
+        return this.zonaCorpo;
+    }
+
+    public void setZonaCorpo(String zona) throws Excecao {
+        if (!(zona != null && zona.matches("[a-zA-ZÀ-ÿ ]+"))) {
+            throw new Excecao("Erro: Zona do corpo inválida.");
+        }
+        this.zonaCorpo = zona;
+    }
+
+    public double getCusto(){
+        return this.CUSTO_UNITARIO;
+    }
+
+    /* --------- calcular custo --------- */
     @Override
     public double calcularCusto() {
         if (CUSTO_UNITARIO < 0) {
@@ -38,31 +66,12 @@ public class ExameRX extends Exame {
         return CUSTO_UNITARIO;
     }
 
+    /* --------- toString --------- */
     @Override
     public String toString() {
-        return super.toString() + ", ExameRX{" +
-                "zonaCorpo='" + zonaCorpo + '\'' +
+        return super.toString() + ", ExameRX{ " +
+                "zonaCorpo=" + getZonaCorpo() +
                 ", custo=" + calcularCusto() +
-                '}';
-    }
-
-    // Validação do nome do técnico
-    private static String validarTecnico(String nome) {
-        if (nome != null && nome.matches("[a-zA-ZÀ-ÿ ]+")) {
-            return nome;
-        } else {
-            System.out.println("Aviso: Nome de técnico inválido. Substituído por 'Técnico Desconhecido'.");
-            return "Técnico Desconhecido";
-        }
-    }
-
-    // Validação da zona do corpo
-    private static String validarZona(String zona) {
-        if (zona != null && zona.matches("[a-zA-ZÀ-ÿ ]+")) {
-            return zona;
-        } else {
-            System.out.println("Aviso: Zona do corpo inválida. Substituída por 'Indefinida'.");
-            return "Indefinida";
-        }
+                " }";
     }
 }

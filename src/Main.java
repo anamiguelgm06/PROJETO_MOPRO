@@ -1,13 +1,16 @@
+import Exceptions.Excecao;
+
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Excecao {
+
         Scanner scanner = new Scanner(System.in);
         Centro centro1 = new Centro("Centro de Saúde Lisboa", 123456789, "Rua das Flores, 123", 218765432, "contato@centrolisboa.pt");
 
-        List<Paciente> pacientes = new ArrayList<>();
-        List<Exame> exames = new ArrayList<>();
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        ArrayList<Exame> exames = new ArrayList<>();
 
         // Carregamento automático de dados iniciais (2 técnicos, 4 pacientes, 2 exames cada)
         carregarDadosIniciais(pacientes, exames);
@@ -45,7 +48,7 @@ public class Main {
                     for (Paciente p : pacientes) {
                         if (p.getNumeroUtente().equals(numeroUtente)) {
                             existe = true;
-                            break;  // Já encontrou, pode sair do loop
+                            break;
                         }
                     }
 
