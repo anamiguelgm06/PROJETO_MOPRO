@@ -17,6 +17,10 @@ public class Data {
             this.dia = 1;
         }
     }
+    public Data(String dataStr) {
+        this(Integer.parseInt(dataStr.split("-")[0]), Integer.parseInt(dataStr.split("-")[1]), Integer.parseInt(dataStr.split("-")[2]));
+    }
+
 
     public static Data now() {
         LocalDate hoje = LocalDate.now();
@@ -50,7 +54,7 @@ public class Data {
 
     @Override
     public String toString() {
-        return String.format("%04d/%02d/%02d", ano, mes, dia);
+        return String.format("%04d-%02d-%02d", ano, mes, dia);
     }
 
 

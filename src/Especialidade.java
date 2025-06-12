@@ -13,7 +13,25 @@ public enum Especialidade implements EspecialidadeDiagnostico {
         this.nome = nome;
     }
 
-    /* --------- "toString" --------- */
+    /* --------- enum por nome e nome descritivo --------- */
+    public static Especialidade fromNomeDescritivo(String nome) {
+        if (nome == null) {
+            return null;
+        }
+        for (Especialidade esp : Especialidade.values()) {
+            if (esp.name().equalsIgnoreCase(nome)) {
+                return esp;
+            }
+        }
+        for (Especialidade esp : Especialidade.values()) {
+            if (esp.getNomeEspecialidade().equalsIgnoreCase(nome)) {
+                return esp;
+            }
+        }
+        return null;
+    }
+
+    /* --------- funcao da interface --------- */
     @Override
     public String getNomeEspecialidade() {
         return this.nome;

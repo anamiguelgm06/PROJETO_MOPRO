@@ -10,7 +10,7 @@ public class Tecnico implements Calculavel {
     private static final Data DATA_POR_OMISSAO                   = new Data(2000, 1, 1);
     private static final float SALARIO_POR_OMISSAO               = 0.0f;
     private static final float SUBSIDIO_POR_OMISSAO              = 0.0f;
-    private static final Especialidade ESPECIALIDADE_POR_OMISSAO = null;
+    private static final Especialidade ESPECIALIDADE_POR_OMISSAO = Especialidade.RX;
 
     /* --------- campo estático para garantir unicidade --------- */
     private static ArrayList<String> cedulasUsadas = new ArrayList<>();
@@ -87,12 +87,13 @@ public class Tecnico implements Calculavel {
     public String getCedulaProfissional(){ return this.cedulaProfissional; }
 
     public void setCedulaProfissional(String cedulaProfissional) throws Excecao {
-        if (cedulaProfissional == null || cedulaProfissional.isBlank() || !cedulaProfissional.matches("\\d{6,}")) {
-            throw new Excecao("Erro: Cédula inválida, deve ter pelo menos 6 dígitos numéricos");
+        if (cedulaProfissional == null || cedulaProfissional.isBlank()) {
+            throw new Excecao("Erro: Cédula inválida, não pode estar vazia.");
         }
-        if (!cedulasUsadas.add(cedulaProfissional)) {
+        if (cedulasUsadas.contains(cedulaProfissional)) {
             throw new Excecao("Erro: Cédula já está em uso por outro técnico");
         }
+        cedulasUsadas.add(cedulaProfissional);
         this.cedulaProfissional = cedulaProfissional;
     }
 
@@ -156,7 +157,6 @@ public class Tecnico implements Calculavel {
         return getSalarioBase() * (1 + (getSubsidio() / 100));
     }
 
-
     /* --------- toString --------- */
     @Override
     public String toString() {
@@ -176,7 +176,7 @@ public class Tecnico implements Calculavel {
         if (this == o) return true;
         if (!(o instanceof Tecnico)) return false;
         Tecnico outro = (Tecnico) o;
-        return this.getCedulaProfissional() == outro.getCedulaProfissional();
+        return this.getCedulaProfissional().equals(outro.getCedulaProfissional());
     }
 }
 

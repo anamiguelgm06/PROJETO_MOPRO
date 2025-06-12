@@ -1,7 +1,7 @@
 import Exceptions.Excecao;
 import java.util.ArrayList;
 
-public class Centro {
+public class Centro{
 
     /* --------- valores por omissão--------- */
     private static final String NOME_POR_OMISSAO    = "Nome indefinido";
@@ -9,9 +9,6 @@ public class Centro {
     private static final String EMAIL_POR_OMISSAO   = "Email indefinido";
     private static final int TELEFONE_POR_OMISSAO = 910_000_000;
     private static final int NIF_POR_OMISSAO      = 000_000_000;
-    private static final ArrayList<Paciente> PACIENTES_POR_OMISSAO = new ArrayList<>();
-    private static final ArrayList<Tecnico> TECNICOS_POR_OMISSAO = new ArrayList<>();
-    private static final ArrayList<Exame> EXAMES_POR_OMISSAO = new ArrayList<>();
 
     /* --------- atributos --------- */
     private String nome, morada, email;
@@ -62,40 +59,40 @@ public class Centro {
             setPacientes(pacientes);
         } catch (Excecao e) {
             System.out.println(e + " Usando valores por omissão.");
-            this.pacientes = PACIENTES_POR_OMISSAO;
+            this.pacientes = new ArrayList<Paciente>();
         }
 
         try {
             setTecnicos(tecnicos);
         } catch (Excecao e) {
             System.out.println(e + " Usando valores por omissão.");
-            this.tecnicos = TECNICOS_POR_OMISSAO;
+            this.tecnicos = new ArrayList<Tecnico>();
         }
 
         try {
             setExames(exames);
         } catch (Excecao e) {
             System.out.println(e + " Usando valores por omissão.");
-            this.exames = EXAMES_POR_OMISSAO;
+            this.exames = new ArrayList<Exame>();
         }
 
     }
 
     /* --------- constutores mais simples --------- */
     public Centro(String nome, int nif, String morada, int telefone, String email) throws Excecao {
-        this(nome, nif, morada, telefone, email, PACIENTES_POR_OMISSAO, TECNICOS_POR_OMISSAO, EXAMES_POR_OMISSAO);
+        this(nome, nif, morada, telefone, email, new ArrayList<Paciente>(), new ArrayList<Tecnico>(), new ArrayList<Exame>());
     }
 
     public Centro(String nome, int nif, String morada, int telefone) throws Excecao {
-        this(nome, nif, morada, telefone, EMAIL_POR_OMISSAO, PACIENTES_POR_OMISSAO, TECNICOS_POR_OMISSAO, EXAMES_POR_OMISSAO);
+        this(nome, nif, morada, telefone, EMAIL_POR_OMISSAO, new ArrayList<Paciente>(), new ArrayList<Tecnico>(), new ArrayList<Exame>());
     }
 
     public Centro(String nome, int nif, String morada) throws Excecao {
-        this(nome, nif, morada, TELEFONE_POR_OMISSAO, EMAIL_POR_OMISSAO, PACIENTES_POR_OMISSAO, TECNICOS_POR_OMISSAO, EXAMES_POR_OMISSAO);
+        this(nome, nif, morada, TELEFONE_POR_OMISSAO, EMAIL_POR_OMISSAO, new ArrayList<Paciente>(), new ArrayList<Tecnico>(), new ArrayList<Exame>());
     }
 
     public Centro() throws Excecao {
-        this(NOME_POR_OMISSAO, NIF_POR_OMISSAO, MORADA_POR_OMISSAO, TELEFONE_POR_OMISSAO, EMAIL_POR_OMISSAO, PACIENTES_POR_OMISSAO, TECNICOS_POR_OMISSAO, EXAMES_POR_OMISSAO);
+        this(NOME_POR_OMISSAO, NIF_POR_OMISSAO, MORADA_POR_OMISSAO, TELEFONE_POR_OMISSAO, EMAIL_POR_OMISSAO, new ArrayList<Paciente>(), new ArrayList<Tecnico>(), new ArrayList<Exame>());
     }
 
     /* --------- getters e setters --------- */
@@ -123,7 +120,7 @@ public class Centro {
         if (morada == null || morada.isEmpty()) {
             throw new Excecao("Erro: A morada não pode estar vazia.");
         }
-        this.nome = nome;
+        this.morada = morada;
     }
 
     public int getTelefone() { return telefone; }
@@ -273,7 +270,7 @@ public class Centro {
     public String toString() {
         return "Centro{ " +
                 "nome=" + getNome() +
-                ", nif=" + getNome() +
+                ", nif=" + getNif() +
                 ", morada=" + getMorada() +
                 ", telefone=" + getTelefone() +
                 ", email=" + getEmail()+

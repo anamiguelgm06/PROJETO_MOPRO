@@ -1,0 +1,26 @@
+centro,Centro de Saúde Lisboa,123456789,Rua das Flores, 123,218765432,contato@centrolisboa.pt
+paciente,1,Joana Silva,F,1990-05-12
+paciente,2,Carlos Mendes,M,1985-03-22
+paciente,3,Rita Carvalho,F,2001-12-05
+paciente,4,Alex Rocha,O,1998-07-30
+tecnico,Cedula1,Marco Barbosa,1000.00,25.00,Raio-X,2005-09-22
+tecnico,Cedula2,Helena Barbosa,999.90,24.90,Ressonância Magnética,2006-10-12
+exame,0,1,Cedula1,2024-06-01,true
+exame,1,1,Cedula2,2024-06-02,Tórax
+exame,2,2,Cedula1,2024-06-01,40.0
+exame,3,2,Cedula2,2024-06-02,Joelho
+exame,4,3,Cedula2,2024-06-03,Coluna
+exame,5,3,Cedula1,2024-06-04,false
+exame,6,4,Cedula1,2024-06-05,45.5
+exame,7,4,Cedula2,2024-06-06,Cabeça
+-----------------------------------------------------------------------------------
+centro,Clínica do Dragão,987654321,Avenida dos Aliados, 456,229876543,geral@clinicadragao.pt
+paciente,5,Sofia Antunes,F,1978-11-15
+paciente,6,Rui Costa,M,1995-01-09
+tecnico,Cedula3,Ana Pereira,1100.00,30.00,Tomografia Axial Computadorizada,1992-08-18
+tecnico,Cedula4,Luís Martins,1050.00,20.00,Raio-X,1989-04-03
+exame,8,5,Cedula3,2024-05-20,55.0
+exame,9,6,Cedula4,2024-05-21,Pulmões
+exame,10,5,Cedula3,2024-05-22,false
+exame,11,6,Cedula4,2024-05-23,Mão Direita
+-----------------------------------------------------------------------------------

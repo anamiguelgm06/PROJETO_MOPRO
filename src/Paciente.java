@@ -6,7 +6,7 @@ public class Paciente {
     /* --------- valores por omissão--------- */
     private static final int NUMERO_POR_OMISSAO   = 0;
     private static final String NOME_POR_OMISSAO  = "Sem nome";
-    private static final char GENERO_POR_OMISSAO  = 'X';
+    private static final char GENERO_POR_OMISSAO  = 'O';
     private static final Data DATA_POR_OMISSAO    = new Data(2000, 1, 1);
 
     /* --------- campo estático para garantir unicidade --------- */
@@ -70,19 +70,26 @@ public class Paciente {
     public int getNumeroUtente() { return numeroUtente; }
 
     public void setNumeroUtente(int numeroUtente) throws Excecao {
+        if (numeroUtente == NUMERO_POR_OMISSAO) {
+            this.numeroUtente = numeroUtente;
+            return;
+        }
+
         if (numeroUtente <= 0) {
             throw new Excecao("Erro: número de utente tem de ser maior do que 0.");
         }
-        if (!numerosUtenteUsados.add(numeroUtente)) {
+
+        if (numerosUtenteUsados.contains(numeroUtente)) {
             throw new Excecao("Erro: número de utente já existe!");
         }
+        numerosUtenteUsados.add(numeroUtente);
         this.numeroUtente = numeroUtente;
     }
 
     public String getNome() { return nome; }
 
     public void setNome(String nome) throws Excecao {
-        if (nome == null || nome.isEmpty() || !nome.matches("[\\p{L} ]+")) { //Aceita qualquer letra, desde com a até com acentos
+        if (nome == null || nome.isEmpty() || !nome.matches("[\\p{L} ]+")) { //Aceita qualquer letra, desde a até com acentos
             throw new Excecao("Erro: O nome deve conter apenas letras (incluindo acentos) e espaços, e não pode ser vazio.");
         }
         this.nome = nome;

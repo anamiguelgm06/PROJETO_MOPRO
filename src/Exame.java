@@ -110,7 +110,7 @@ public abstract class Exame implements Calculavel {
                 "código=" + getCodigo() +
                 ", dataRealização=" + getDataRealizacao() +
                 ", paciente=" + getPaciente().getNome() +
-                ", técnicoResponsável=" + getTecnicoResponsavel().getNome() +
+                ", técnicoResponsável=" + getTecnicoResponsavel().getCedulaProfissional() +
                 " }";
     }
 
