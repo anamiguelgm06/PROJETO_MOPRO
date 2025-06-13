@@ -107,7 +107,7 @@ public class Centro{
 
     public int getNif() { return nif; }
 
-    public void setNif(int nif) throws Excecao{
+    public void setNif(int nif) throws Excecao {
         if (!(nif != 0 && String.valueOf(nif).length() == 9)) {
             throw new Excecao("Erro: NIF inválido. Deve conter exatamente 9 dígitos numéricos.");
         }
@@ -134,7 +134,7 @@ public class Centro{
 
     public String getEmail() { return email; }
 
-    public void setEmail(String email) throws Excecao{
+    public void setEmail(String email) throws Excecao {
         if (!(email != null && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z]+\\.pt$") && !email.contains(" "))) {
             throw new Excecao("Erro: Email inválido. Deve estar no formato texto@dominio.pt e sem espaços.");
         }
