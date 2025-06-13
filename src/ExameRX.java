@@ -1,4 +1,4 @@
-import Exceptions.Excecao;
+import Exceptions.*;
 
 public class ExameRX extends Exame {
 
@@ -10,33 +10,26 @@ public class ExameRX extends Exame {
     private final double CUSTO_UNITARIO;
 
     /* --------- construtor completo --------- */
-    public ExameRX(Data dataRealizacao, Paciente paciente, Tecnico tecnicoResponsavel, String zonaCorpo) throws Excecao {
+    public ExameRX(Data dataRealizacao, Paciente paciente, Tecnico tecnicoResponsavel, String zonaCorpo) {
         super(dataRealizacao, paciente, tecnicoResponsavel);
-
-        try {
-            setZonaCorpo(zonaCorpo);
-        } catch (Excecao e) {
-            System.out.println(e + " Usando valor por omissão.");
-            this.zonaCorpo = ZONA_POR_OMISSAO;
-        }
-
+        setZonaCorpo(zonaCorpo);
         this.CUSTO_UNITARIO = 24.0;
     }
 
     /* --------- construtores mais simples --------- */
-    public ExameRX(Data dataRealizacao, Paciente paciente, Tecnico tecnicoResponsavel) throws Excecao {
+    public ExameRX(Data dataRealizacao, Paciente paciente, Tecnico tecnicoResponsavel) {
         this(dataRealizacao, paciente, tecnicoResponsavel, ZONA_POR_OMISSAO);
     }
 
-    public ExameRX(Data dataRealizacao, Paciente paciente) throws Excecao {
+    public ExameRX(Data dataRealizacao, Paciente paciente) {
         this(dataRealizacao, paciente, TECNICO_POR_OMISSAO, ZONA_POR_OMISSAO);
     }
 
-    public ExameRX(Data dataRealizacao) throws Excecao {
+    public ExameRX(Data dataRealizacao) {
         this(dataRealizacao, PACIENTE_POR_OMISSAO, TECNICO_POR_OMISSAO, ZONA_POR_OMISSAO);
     }
 
-    public ExameRX() throws Excecao {
+    public ExameRX() {
         this(DATA_POR_OMISSAO, PACIENTE_POR_OMISSAO, TECNICO_POR_OMISSAO, ZONA_POR_OMISSAO);
     }
 
@@ -45,11 +38,16 @@ public class ExameRX extends Exame {
         return this.zonaCorpo;
     }
 
-    public void setZonaCorpo(String zona) throws Excecao {
-        if (!(zona != null && zona.matches("[a-zA-ZÀ-ÿ ]+"))) {
-            throw new Excecao("Erro: Zona do corpo inválida.");
+    public void setZonaCorpo(String zona) {
+        try {
+            if (!(zona != null && zona.matches("[a-zA-ZÀ-ÿ ]+"))) {
+                throw new Excecao("Erro: Zona do corpo inválida.");
+            }
+            this.zonaCorpo = zona;
+        } catch (Excecao e) {
+            this.zonaCorpo = ZONA_POR_OMISSAO;
+            System.out.println(e + " Usando valor por omissão.");
         }
-        this.zonaCorpo = zona;
     }
 
     public double getCusto(){
@@ -59,11 +57,15 @@ public class ExameRX extends Exame {
     /* --------- calcular custo --------- */
     @Override
     public double calcularCusto() {
-        if (CUSTO_UNITARIO < 0) {
-            System.out.println("Erro: Custo unitário não pode ser negativo.");
+        try {
+            if (CUSTO_UNITARIO < 0) {
+                throw new ExcecaoRuntime("Erro: Custo unitário não pode ser negativo.");
+            }
+            return CUSTO_UNITARIO;
+        } catch (ExcecaoRuntime e) {
+            System.out.println(e + " Usando valor por omissão.");
             return 0;
         }
-        return CUSTO_UNITARIO;
     }
 
     /* --------- toString --------- */
