@@ -82,11 +82,11 @@ public class Main {
                         e.getDataRealizacao());
 
                 if (e instanceof ExameRX) {
-                    linhaExame += "," + ((ExameRX) e).getZonaCorpo();
+                    linhaExame += ",RX," + ((ExameRX) e).getZonaCorpo();
                 } else if (e instanceof ExameRM) {
-                    linhaExame += "," + ((ExameRM) e).getContraste();
+                    linhaExame += ",RM," + ((ExameRM) e).getContraste();
                 } else if (e instanceof ExameTAC) {
-                    linhaExame += "," + ((ExameTAC) e).getCustoUnitario();
+                    linhaExame += ",TAC," + ((ExameTAC) e).getCustoUnitario();
                 }
 
                 formatter.format("%s%n", linhaExame);

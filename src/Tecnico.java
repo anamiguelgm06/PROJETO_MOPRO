@@ -98,6 +98,7 @@ public class Tecnico implements Calculavel, EspecialidadeDiagnostico {
             }
             this.dataNascimento = dataNascimento;
         } catch (Excecao e) {
+            this.dataNascimento = DATA_POR_OMISSAO;
             System.out.println(e + " Usando valor por omissão.");
         }
     }
@@ -137,6 +138,7 @@ public class Tecnico implements Calculavel, EspecialidadeDiagnostico {
              }
              this.especialidade = especialidade;
          } catch (Excecao e) {
+             this.especialidade = ESPECIALIDADE_POR_OMISSAO;
              System.out.println(e + " Usando valor por omissão.");
          }
      }
@@ -184,7 +186,7 @@ public class Tecnico implements Calculavel, EspecialidadeDiagnostico {
     /* --------- funcao da interface --------- */
     @Override
     public String getNomeEspecialidade() {
-        return this.nome;
+        return this.especialidade;
     }
 }
 

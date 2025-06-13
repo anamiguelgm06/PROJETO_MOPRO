@@ -65,7 +65,7 @@ public class Paciente {
             this.numeroUtente = numeroUtente;
 
         } catch (Excecao e) {
-            this.numeroUtente = numeroUtente;
+            this.numeroUtente = NUMERO_POR_OMISSAO;
             System.out.println(e + " Usando valor por omissão.");
         }
     }
