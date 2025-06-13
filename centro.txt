@@ -1,0 +1,16 @@
+centro,Centro de Saúde Lisboa,123456789,Rua das Flores, 123,218765432,contato@centrolisboa.pt
+paciente,1,Joana Silva,F,1990-05-12
+paciente,2,Carlos Mendes,M,1985-03-22
+paciente,3,Rita Carvalho,F,2001-12-05
+paciente,4,Alex Rocha,M,1998-07-30
+tecnico,Cedula2,Marco Barbosa,1000.0,25.0,Marco Barbosa,2005-09-22
+tecnico,Cedula1,Helena Barbosa,999.9,24.9,Helena Barbosa,2006-10-12
+exame,1,1,Cedula2,2025-06-01,true
+exame,2,1,Cedula1,2025-06-01,Tórax
+exame,3,2,Cedula2,2025-06-05,40.0
+exame,4,2,Cedula1,2025-06-07,Joelho
+exame,5,3,Cedula1,2025-06-12,Coluna
+exame,6,3,Cedula2,2025-06-01,false
+exame,7,4,Cedula2,2025-06-20,45.5
+exame,8,4,Cedula1,2025-06-05,Cabeça
+-----------------------------------------------------------------------------------
